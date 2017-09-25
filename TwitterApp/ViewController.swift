@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ViewController: UIViewController {
 
+    fileprivate func extractedFunc() {
+        view.backgroundColor = .white
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white 
+        extractedFunc()
         
        
     }
