@@ -6,5 +6,6 @@ target 'TwitterApp' do
   use_frameworks!
 
   pod 'SwiftyJSON'
+  pod 'LBTAComponents'
 
 end
