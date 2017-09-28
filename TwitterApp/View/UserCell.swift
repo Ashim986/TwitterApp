@@ -1,58 +1,11 @@
-//
-//  Cell.swift
-//  TwitterApp
-//
-//  Created by ashim Dahal on 9/26/17.
-//  Copyright © 2017 ashim Dahal. All rights reserved.
-//
-
 import LBTAComponents
-
-let tweeterBlue = UIColor(r: 61, g: 167, b: 244)
-
-class UserHeader : DatasourceCell{
-    
-    let textLabel : UILabel = {
-        let label = UILabel()
-        label.text = "WHO TO FOLLOW"
-        label.font = UIFont.systemFont(ofSize: 15)
-        return label
-    }()
-    
-    override func setupViews() {
-        super.setupViews()
-        separatorLineView.isHidden = false
-        separatorLineView.backgroundColor = UIColor(r: 230, g: 230, b: 230)
-        addSubview(textLabel)
-        textLabel.fillSuperview()
-    }
-}
-
-class  UserFooter : DatasourceCell {
-    
-    let textLabel : UILabel = {
-       let label = UILabel()
-        label.text = "show me more"
-        label.font = UIFont.systemFont(ofSize: 16)
-        return label
-    }()
-    
-    override func setupViews() {
-        super.setupViews()
-        addSubview(textLabel)
-        textLabel.textColor = tweeterBlue
-        // this will fill entire view of footer instead of having it anchored to the view
-        textLabel.fillSuperview()
-    }
-}
-
 
 
 class UserCell: DatasourceCell {
     
     override var datasourceItem: Any? {
         didSet {
-              //  print(datasourceItem)
+            //  print(datasourceItem)
             
             guard let users = datasourceItem as? User else {
                 return
@@ -70,7 +23,7 @@ class UserCell: DatasourceCell {
         let imageView = UIImageView()
         imageView.image = #imageLiteral(resourceName: "profile_image")// profile_image
         imageView.layer.cornerRadius = 5
-//        imageView.layer.masksToBounds = true
+        //        imageView.layer.masksToBounds = true
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -91,7 +44,7 @@ class UserCell: DatasourceCell {
     }()
     
     let bioTextView : UITextView = {
-       let textVeiw = UITextView()
+        let textVeiw = UITextView()
         textVeiw.text = "iPhone, iPad, iOS Programming Community. Join us to learn Swift, Objective - C and build iOS apps!"
         textVeiw.font = UIFont.systemFont(ofSize: 15)
         textVeiw.backgroundColor = .clear
@@ -99,8 +52,8 @@ class UserCell: DatasourceCell {
     }()
     
     let followButton : UIButton = {
-       let button = UIButton()
-
+        let button = UIButton()
+        
         button.layer.cornerRadius = 5
         button.layer.borderColor = tweeterBlue.cgColor
         button.layer.borderWidth = 1
@@ -115,22 +68,25 @@ class UserCell: DatasourceCell {
     
     
     override func setupViews() {
-        super.setupViews()
         
+        super.setupViews()
+        self.backgroundColor = .white
         separatorLineView.isHidden = false
         separatorLineView.backgroundColor = UIColor(r: 230, g: 230, b: 230)
+        
         addSubview(profileImageView)
         addSubview(nameLabel)
         addSubview(usernameLabel)
         addSubview(bioTextView)
         addSubview(followButton)
+    
         
         profileImageView.anchor(self.topAnchor, left: self.leftAnchor, bottom: nil, right: nil, topConstant: 12, leftConstant: 12, bottomConstant: 0, rightConstant: 0, widthConstant: 50, heightConstant: 50)
         
         
         nameLabel.anchor(profileImageView.topAnchor, left: profileImageView.rightAnchor, bottom: nil, right: followButton.leftAnchor, topConstant: 0, leftConstant: 8, bottomConstant: 0, rightConstant: 12, widthConstant: 0, heightConstant: 20)
         
-       usernameLabel.anchor(nameLabel.bottomAnchor, left: nameLabel.leftAnchor, bottom: nil, right: nameLabel.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 20)
+        usernameLabel.anchor(nameLabel.bottomAnchor, left: nameLabel.leftAnchor, bottom: nil, right: nameLabel.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 20)
         
         bioTextView.anchor(usernameLabel.bottomAnchor, left: usernameLabel.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, topConstant: -4, leftConstant: -4, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
