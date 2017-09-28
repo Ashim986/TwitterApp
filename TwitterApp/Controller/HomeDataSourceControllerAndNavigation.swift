@@ -47,5 +47,12 @@ extension HomeDataSourceController {
         navigationController?.navigationBar.backgroundColor = .white
         navigationController?.navigationBar.isTranslucent = false
         
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        
+        let navBarSaparatorView = UIView()
+        navBarSaparatorView.backgroundColor = UIColor(r: 230, g: 230, b: 230)
+        view.addSubview(navBarSaparatorView)
+        navBarSaparatorView.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0.5)
     }
 }
