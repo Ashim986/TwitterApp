@@ -7,6 +7,6 @@ target 'TwitterApp' do
 
   pod 'SwiftyJSON'
   pod 'LBTAComponents', '~> 0.1.9'
- 
+  pod 'TRON'
 
 end
