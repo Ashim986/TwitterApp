@@ -21,6 +21,7 @@
 		C55711E21F77994300475EBD /* TwitterAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55711E11F77994300475EBD /* TwitterAppUITests.swift */; };
 		C577727B1F7CD9DC008C5A5D /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C577727A1F7CD9DC008C5A5D /* TweetCell.swift */; };
 		C577727D1F7CE229008C5A5D /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C577727C1F7CE229008C5A5D /* Tweet.swift */; };
+		C57772801F7DBD29008C5A5D /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = C577727F1F7DBD29008C5A5D /* Service.swift */; };
 		F69EE4E959B6DEAFB8B7B936 /* Pods_TwitterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0F135ED8251AE21E9DB7EDD /* Pods_TwitterApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		C55711E31F77994300475EBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C577727A1F7CD9DC008C5A5D /* TweetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		C577727C1F7CE229008C5A5D /* Tweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		C577727F1F7DBD29008C5A5D /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		DBC865F85FAAC60DEEE1999C /* Pods-TwitterApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwitterApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TwitterApp/Pods-TwitterApp.release.xcconfig"; sourceTree = "<group>"; };
 		F0F135ED8251AE21E9DB7EDD /* Pods_TwitterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TwitterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -156,6 +158,7 @@
 		C55711C01F77994200475EBD /* TwitterApp */ = {
 			isa = PBXGroup;
 			children = (
+				C577727E1F7DBD0E008C5A5D /* Service */,
 				C54336CC1F7AC1F100835CD3 /* View */,
 				C54336CB1F7AC1ED00835CD3 /* Model */,
 				C54336C91F7AC1D300835CD3 /* Controller */,
@@ -184,6 +187,14 @@
 				C55711E31F77994300475EBD /* Info.plist */,
 			);
 			path = TwitterAppUITests;
+			sourceTree = "<group>";
+		};
+		C577727E1F7DBD0E008C5A5D /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				C577727F1F7DBD29008C5A5D /* Service.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		E52DAE941CCF3C35B2327A4C /* Frameworks */ = {
@@ -398,6 +409,7 @@
 				C54336D21F7B3AD300835CD3 /* User.swift in Sources */,
 				C54336CE1F7AC21D00835CD3 /* UserHeaderAndFooter.swift in Sources */,
 				C55711C21F77994200475EBD /* AppDelegate.swift in Sources */,
+				C57772801F7DBD29008C5A5D /* Service.swift in Sources */,
 				C54336C61F7A234F00835CD3 /* HomeController.swift in Sources */,
 				C54336D41F7B57F400835CD3 /* UserCell.swift in Sources */,
 			);

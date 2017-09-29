@@ -7,6 +7,8 @@
 //
 
 import LBTAComponents
+import TRON
+import SwiftyJSON
 
 class HomeDataSourceController: DatasourceController {
     
@@ -25,13 +27,18 @@ class HomeDataSourceController: DatasourceController {
         //        setting up background color for collection view
         //        collectionView?.backgroundColor = .red
         
-        let homeDataSource = HomeDataSource()
-        self.datasource = homeDataSource
+//        let homeDataSource = HomeDataSource()
+//        self.datasource = homeDataSource
+        
+//        fetchHomeFeed()
+     
+        Service.sharedInstance.fetchHomeFeed { (homeDataSource) in
+            self.datasource = homeDataSource
+        }
         
     }
-    
    
-    
+
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
