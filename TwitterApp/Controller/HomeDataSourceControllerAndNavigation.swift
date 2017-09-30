@@ -11,7 +11,7 @@ import LBTAComponents
 
 extension HomeDataSourceController {
     
- func setupNavigationBarItem(){
+    func setupNavigationBarItem(){
         
         setupRemainingNavigationTitleItems()
         setupLeftNavigationItem()

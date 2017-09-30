@@ -15,34 +15,23 @@ struct Service  {
     
     let tron = TRON(baseURL: "https://api.letsbuildthatapp.com")
     
-    func fetchHomeFeed(completion : @escaping (HomeDataSource) -> ()) {
-        print("Fetching home feed")
+    func fetchHomeFeed(completion : @escaping (HomeDataSource?, Error? ) -> ()) {
         // start our json fetch
         // this is treditional way of fetching data
-        //        URLSession.shared.dataTask(with: <#T##URL#>, completionHandler: <#T##(Data?, URLResponse?, Error?) -> Void#>)
-        
+        // URLSession.shared.dataTask(with: , completionHandler: )
         // Using TRON
         
         let request : APIRequest<HomeDataSource,JSONError> = tron.request("/twitter/home")
-        
         request.perform(withSuccess: { (homeDataSource) in
-            
-            completion(homeDataSource)
-            
-//            self.datasource = homeDataSource
-            
-            
+            completion(homeDataSource, nil)
         }) { (err) in
-            
-            print("Failed to fetch json...",err)
+            completion(nil, err)
         }
-        
-    
     }
     
     class JSONError : JSONDecodable {
         required init(json: JSON) throws {
-            print("JSON Error")
+            NSLog("JSON Error")
         }
     }
 }

@@ -12,55 +12,84 @@ import SwiftyJSON
 
 class HomeDataSourceController: DatasourceController {
     
+    let errorMessageLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Apologies something went wrong. Please try again later..."
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.isHidden = true
+        return label
+    }()
+    
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-       collectionViewLayout.invalidateLayout()
+        collectionViewLayout.invalidateLayout()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.addSubview(errorMessageLabel)
+        errorMessageLabel.fillSuperview() // comes from LBTA component which occoupy all of the windows screen
         
         collectionView?.backgroundColor = UIColor(r: 232, g: 236, b: 241)
-        
         setupNavigationBarItem()
         
-        //        setting up background color for collection view
-        //        collectionView?.backgroundColor = .red
-        
-//        let homeDataSource = HomeDataSource()
-//        self.datasource = homeDataSource
-        
-//        fetchHomeFeed()
-     
-        Service.sharedInstance.fetchHomeFeed { (homeDataSource) in
+        Service.sharedInstance.fetchHomeFeed { (homeDataSource, err) in
+            
+            if let err = err {
+                self.errorMessageLabel.isHidden = false
+                
+                if let apiError = err as? APIError<Service.JSONError>{
+                    if apiError.response?.statusCode != 200{
+                        self.errorMessageLabel.text = "Status code was not 200"
+                    }
+                }
+                return
+            }
+            
             self.datasource = homeDataSource
         }
-        
     }
-   
-
-    
+ 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if let user = self.datasource?.item(indexPath) as? User {
-//            user.bioText
+        if indexPath.section == 0{
+            
+            guard let user = self.datasource?.item(indexPath) as? User else{return .zero}
+            //            user.bioText
             
             // let's get an estimation of the height of our cell based on user.bioText
-            let approximateWidthOfBioTextView = view.frame.width - 12 - 50 - 12 - 2
-            let size = CGSize(width: approximateWidthOfBioTextView, height: 1000)
-            let attributes = [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 15)]
+            let estimatedHeight = estimatedHeightForText(user.bioText)
+            return CGSize(width: view.frame.width, height: estimatedHeight + 66)
             
-            let estimatedFrame = NSString(string: user.bioText).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+        } else if indexPath.section == 1 {
             
-            return CGSize(width: view.frame.width, height: estimatedFrame.height + 66)
+            //            tweet size estimation
+            
+            guard let tweet = datasource?.item(indexPath) as? Tweet else{
+                return .zero
+            }
+            let estimatedHeight = estimatedHeightForText(tweet.message)
+            return CGSize(width: view.frame.width, height: estimatedHeight + 74)
+            
         }
-       
         
         return CGSize(width: view.frame.width, height: 150)
+    }
+    
+    private func estimatedHeightForText(_ text : String) -> CGFloat {
+        
+        let approximateWidthOfBioTextView = view.frame.width - 12 - 50 - 12 - 2
+        let size = CGSize(width: approximateWidthOfBioTextView, height: 1000)
+        let attributes = [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 15)]
+        
+        let estimatedFrame = NSString(string: text).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+        
+        return estimatedFrame.height
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -70,12 +99,11 @@ class HomeDataSourceController: DatasourceController {
         return CGSize(width : view.frame.width, height: 60)
         
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         if section == 1{
             return .zero
         }
         return CGSize(width: view.frame.width, height: 50)
     }
-    
-    
 }

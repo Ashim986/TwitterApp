@@ -32,7 +32,7 @@ class UserHeader : DatasourceCell{
 class  UserFooter : DatasourceCell {
     
     let textLabel : UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.text = "show me more"
         label.font = UIFont.systemFont(ofSize: 16)
         return label
@@ -44,14 +44,14 @@ class  UserFooter : DatasourceCell {
         whiteBackgroundView.backgroundColor = .white
         addSubview(whiteBackgroundView)
         addSubview(textLabel)
-      
+        
         textLabel.textColor = tweeterBlue
-     
+        
         whiteBackgroundView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 14, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         // this will fill entire view of footer instead of having it anchored to the view
         textLabel.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 12, bottomConstant: 14, rightConstant: 0, widthConstant: 0, heightConstant: 0 )
-    
+        
     }
 }
 

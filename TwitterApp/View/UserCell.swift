@@ -5,22 +5,21 @@ class UserCell: DatasourceCell {
     
     override var datasourceItem: Any? {
         didSet {
-            //  print(datasourceItem)
-            
             guard let users = datasourceItem as? User else {
                 return
             }
             nameLabel.text = users.name
             usernameLabel.text = users.userName
             bioTextView.text = users.bioText
-            profileImageView.image = users.profileImage
+            
+            // Image to be loaded form this download file
+            profileImageView.loadImage(urlString: users.profileImageURL)
         }
     }
     
-    
-    let profileImageView : UIImageView = {
+    let profileImageView : CachedImageView = {
         
-        let imageView = UIImageView()
+        let imageView = CachedImageView()
         imageView.image = #imageLiteral(resourceName: "profile_image")// profile_image
         imageView.layer.cornerRadius = 5
         //        imageView.layer.masksToBounds = true
@@ -79,7 +78,7 @@ class UserCell: DatasourceCell {
         addSubview(usernameLabel)
         addSubview(bioTextView)
         addSubview(followButton)
-    
+        
         
         profileImageView.anchor(self.topAnchor, left: self.leftAnchor, bottom: nil, right: nil, topConstant: 12, leftConstant: 12, bottomConstant: 0, rightConstant: 0, widthConstant: 50, heightConstant: 50)
         

@@ -15,13 +15,14 @@ class TweetCell: DatasourceCell{
             guard let tweet = datasourceItem as? Tweet else {
                 return
             }
+            profileImageView.loadImage(urlString: tweet.user.profileImageURL)
             
             let attributedText = NSMutableAttributedString(string: tweet.user.name , attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 16)])
             
             let userNameString = "  \(tweet.user.userName)\n"
             
             attributedText.append(NSAttributedString(string: userNameString, attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 15), NSAttributedStringKey.foregroundColor : UIColor.gray ]))
-           
+            
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.lineSpacing = 4
             let range = NSMakeRange(0, attributedText.string.characters.count)
@@ -29,7 +30,7 @@ class TweetCell: DatasourceCell{
             
             attributedText.append(NSAttributedString(string: tweet.message, attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 15)]))
             
-         
+            
             messageTextView.attributedText = attributedText
         }
     }
@@ -41,9 +42,9 @@ class TweetCell: DatasourceCell{
         return textView
     }()
     
-    let profileImageView : UIImageView = {
+    let profileImageView : CachedImageView = {
         
-        let imageView = UIImageView()
+        let imageView = CachedImageView()
         imageView.image = #imageLiteral(resourceName: "profile_image")// profile_image
         imageView.layer.cornerRadius = 5
         //        imageView.layer.masksToBounds = true
@@ -78,15 +79,15 @@ class TweetCell: DatasourceCell{
         super.setupViews()
         addSubview(profileImageView)
         addSubview(messageTextView)
-       
+        
         
         
         separatorLineView.isHidden = false
         separatorLineView.backgroundColor = UIColor(r: 230, g: 230, b: 230)
         backgroundColor = .white
-    
-    
-     profileImageView.anchor(self.topAnchor, left: self.leftAnchor, bottom: nil, right: nil, topConstant: 12, leftConstant: 12, bottomConstant: 0, rightConstant: 0, widthConstant: 50, heightConstant: 50)
+        
+        
+        profileImageView.anchor(self.topAnchor, left: self.leftAnchor, bottom: nil, right: nil, topConstant: 12, leftConstant: 12, bottomConstant: 0, rightConstant: 0, widthConstant: 50, heightConstant: 50)
         
         messageTextView.anchor(topAnchor, left: profileImageView.rightAnchor, bottom: bottomAnchor , right: rightAnchor , topConstant: 4, leftConstant: 4, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
@@ -106,15 +107,15 @@ class TweetCell: DatasourceCell{
         bottomStackView.distribution = .fillEqually
         
         
-
+        
         addSubview(bottomStackView)
         addSubview(replyButton)
         addSubview(retweetButton)
         addSubview(likeButton)
         addSubview(directMessageButton)
-       
+        
         bottomStackView.anchor(nil, left: messageTextView.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 4, rightConstant: 0, widthConstant: 0, heightConstant: 20)
-       
+        
         
         replyButton.anchor(replyButtonContainerView.topAnchor, left: replyButtonContainerView.leftAnchor, bottom: nil, right: nil, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 20, heightConstant: 20)
         
